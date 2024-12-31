@@ -1,0 +1,90 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h2>What is this sample doing?</h2>
+<p>This sample shows what information and permissions you are passing to application when using App Registration and Enterprise Application.</p>
+<p>Here is the user role(s)</p>
+@{
+    var roles = ViewData["UserRoles"] as List<Claim>;
+}
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr>
+        <th>Type</th>
+        <th>Value</th>
+    </tr>
+    @if (roles != null)
+    {
+        @foreach (var claim in roles)
+        {
+        <tr>
+            <td>@claim.Type</td>
+            <td>@claim.Value</td>
+        </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="2">No roles found</td>
+        </tr>
+    }
+
+</table>
+
+<p>Before rendering the page, the Controller was able to make a call to Microsoft Graph's <code>/me</code> API on your behalf :</p>
+<p><details>
+    <summary>See connected user basic info</summary>
+    <pre><code class="language-js">@ViewData["UserInfo"]</code></pre>
+</details></p>
+
+<p>Based on the user you are logged in with in the application, the application was able to retrieve those token to access the backend on your behalf</p>
+<p><details>
+    <summary>See Graph Token Details</summary>
+    <code id="graph-bearer">@ViewData["UserGraphToken"]</code>
+    <button type="button" class="btn btn-primary btn-md" onclick="copyElement('graph-bearer')">Copy Bearer</button>
+</details></p>
+<p><details>
+    <summary>See SchoolApi Token Details</summary>
+    <code id="school-bearer">@ViewData["UserSchoolToken"]</code>
+    <button type="button" class="btn btn-primary btn-md" onclick="copyElement('school-bearer')">Copy Bearer</button>
+</details></p>
+
+<p>The SchoolApi retrieved the list of groups the user is member of by calling the Graph API on the user behalf. The following groups were retrieved :</p>
+@{
+    var groups = ViewData["SchoolApiData"] as IEnumerable<Group>;
+}
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Description</th>
+    </tr>
+    @if (groups != null)
+    {
+        @foreach (var group in groups)
+        {
+        <tr>
+            <td>@group.Name</td>
+            <td>@group.Id</td>
+            <td>@group.Description</td>
+        </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="2">No group found</td>
+        </tr>
+    }
+
+</table>
+
+
