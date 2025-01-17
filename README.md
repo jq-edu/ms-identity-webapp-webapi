@@ -67,10 +67,10 @@ Navigate to the project directory and run the following commands:
 ```powershell
 # Run the Web API
 cd WebAPI
-dotnet debug --launch-profile https
+dotnet run --launch-profile https
 
 # Run the Web App
-cd ../WebApp
+cd WebApp
 dotnet run --launch-profile https
 ```
 Alternatively, you can run the solution using Visual Studio Code.  Go to the Solution Explorer, right-click on each project (starting with the WebApi), and under Debug, start a new instance.
