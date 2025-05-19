@@ -11,12 +11,7 @@ jobs:
     # Windows and Linux agents are supported
     runs-on: windows-latest
 
-    permissions:
-      contents: read
-      id-token: write
-      actions: read
-      # Write access for security-events is only required for customers looking for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
-      security-events: read
+    permissions: read-all
 
     steps:
 
