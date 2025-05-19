@@ -13,10 +13,10 @@ jobs:
 
     permissions:
       contents: read
-      id-token: write
+      id-token: read
       actions: read
       # Write access for security-events is only required for customers looking for MSDO results to appear in the codeQL security alerts tab on GitHub (Requires GHAS)
-      security-events: write
+      security-events: read
 
     steps:
 
